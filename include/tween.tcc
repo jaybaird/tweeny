@@ -330,14 +330,14 @@ namespace tweeny {
         return seek(static_cast<int32_t>(points.at(p).stacked), suppress);
     }
 
-    template<typename T, typename... Ts> inline uint16_t tween<T, Ts...>::point() const {
+    template<typename T, typename... Ts> inline uint32_t tween<T, Ts...>::point() const {
         return currentPoint;
     }
 
-    template<typename T, typename... Ts> inline uint16_t tween<T, Ts...>::pointAt(float progress) const {
+    template<typename T, typename... Ts> inline uint32_t tween<T, Ts...>::pointAt(float progress) const {
         progress = detail::clip(progress, 0.0f, 1.0f);
         uint32_t t = static_cast<uint32_t>(progress * total);
-        uint16_t point = 0;
+        uint32_t point = 0;
         while (t > points.at(point).stacked) point++;
         if (point > 0 && t <= points.at(point - 1u).stacked) point--;
         return point;

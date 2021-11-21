@@ -182,7 +182,7 @@ namespace tweeny {
              * @brief Specifies the duration, typically in milliseconds, for the tweening of values in last point.
              *
              * You can either specify a single duration for all values or give every value its own duration. Value types
-             * must be convertible to the uint16_t type.
+             * must be convertible to the uint32_t type.
              *
              * **Example**:
              *
@@ -556,14 +556,14 @@ namespace tweeny {
              *
              * @returns Current tween point
              */
-            uint16_t point() const;
+            uint32_t point() const;
 
         private /* member types */:
             using traits = detail::tweentraits<T, Ts...>;
 
         private /* member variables */:
             uint32_t total = 0; // total runtime
-            uint16_t currentPoint = 0; // current point
+            uint32_t currentPoint = 0; // current point
             float currentProgress = 0; // current progress
             std::vector<detail::tweenpoint<T, Ts...>> points;
             typename traits::valuesType current;
@@ -578,7 +578,7 @@ namespace tweeny {
             void interpolate(float prog, unsigned point, typename traits::valuesType & values, detail::int2type<0>) const;
             void render(float p);
             void dispatch(std::vector<typename traits::callbackType> & cbVector);
-            uint16_t pointAt(float progress) const;
+            uint32_t pointAt(float progress) const;
     };
 
     /**
@@ -626,14 +626,14 @@ namespace tweeny {
             tween<T> & backward(); ///< @sa tween::backward
             int direction() const; ///< @sa tween::direction
             const T & jump(size_t point, bool suppressCallbacks = false); ///< @sa tween::jump
-            uint16_t point() const; ///< @sa tween::point
+            uint32_t point() const;                                       ///< @sa tween::point
 
         private /* member types */:
             using traits = detail::tweentraits<T>;
 
         private /* member variables */:
-            uint32_t total = 0; // total runtime
-            uint16_t currentPoint = 0; // current point
+            uint32_t total = 0;        // total runtime
+            uint32_t currentPoint = 0; // current point
             float currentProgress = 0; // current progress
             std::vector<detail::tweenpoint<T>> points;
             T current;
@@ -647,7 +647,7 @@ namespace tweeny {
             void interpolate(float prog, unsigned point, T & value) const;
             void render(float p);
             void dispatch(std::vector<typename traits::callbackType> & cbVector);
-            uint16_t pointAt(float progress) const;
+            uint32_t pointAt(float progress) const;
     };
 }
 

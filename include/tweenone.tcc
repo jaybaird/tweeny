@@ -317,16 +317,16 @@ namespace tweeny {
         return seek(points.at(p).stacked, suppress);
     }
 
-    template<typename T> inline uint16_t tween<T>::point() const {
+    template<typename T> inline uint32_t tween<T>::point() const {
         return currentPoint;
     }
 
 
 
-    template<typename T> inline uint16_t tween<T>::pointAt(float progress) const {
+    template<typename T> inline uint32_t tween<T>::pointAt(float progress) const {
         progress = detail::clip(progress, 0.0f, 1.0f);
         auto t = static_cast<uint32_t>(progress * total);
-        uint16_t point = 0;
+        uint32_t point = 0;
         while (t > points.at(point).stacked) point++;
         if (point > 0 && t <= points.at(point - 1u).stacked) point--;
         return point;
